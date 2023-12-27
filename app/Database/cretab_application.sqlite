@@ -1,0 +1,14 @@
+/*
+ * Lancer la commande suivante pour insérer les données
+ * cat cretab_application.sqlite | sqlite3 test_database.sdb
+ */
+ 
+CREATE TABLE track_application (
+	id integer NOT NULL PRIMARY KEY AUTOINCREMENT , 
+	name varchar(255) NOT NULL , 
+	code varchar(255) NOT NULL , 
+	owner integer 
+);
+
+
+

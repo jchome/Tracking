@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<object shortName="track_application" displayName="Application" obName="Application">
+	<description>Application tracée</description>
+	<attribute id="id" name="Identifiant interne" nullable="NO" isKey="YES" autoincrement="YES" type="int" >
+		<description>identifiant système</description>
+	</attribute>
+	<attribute id="name" name="Nom" nullable="NO" type="varchar(255)" >
+		<description>Nom pour l'utilisateur</description>
+	</attribute>
+	<attribute id="code" name="Code" nullable="NO" type="varchar(255)" >
+		<description>Code pour le système</description>
+	</attribute>
+	<attribute id="owner" name="Propriétaire" nullable="YES" type="int" referencedObject="Utilisateur" access="default" display="name" >
+		<description>Propriétaire de l'application</description>
+	</attribute>
+</object>

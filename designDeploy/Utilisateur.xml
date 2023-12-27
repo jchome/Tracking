@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<object shortName="track_user" displayName="Utilisateur" obName="User">
+	<description>Propriétaire d'application</description>
+	<attribute id="id" name="Identifiant" nullable="NO" isKey="YES" autoincrement="YES" type="int" >
+		<description>identifiant système</description>
+	</attribute>
+	<attribute id="name" name="Nom" nullable="NO" type="varchar(255)" >
+		<description>Nom de l'utilisateur</description>
+	</attribute>
+	<attribute id="login" name="Login" nullable="NO" type="varchar(255)" >
+		<description>Login de connexion</description>
+	</attribute>
+	<attribute id="password" name="Mot de passe" nullable="NO" type="password(255)" >
+		<description>Mot de passe de connexion</description>
+	</attribute>
+	<attribute id="email" name="E-mail" nullable="YES" type="varchar(255)" >
+		<description>E-mail de l'utilisateur</description>
+	</attribute>
+</object>

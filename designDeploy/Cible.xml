@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<object shortName="track_target" displayName="Cible" obName="Target">
+	<description>Objet tracé</description>
+	<attribute id="id" name="Identifiant" nullable="NO" isKey="YES" autoincrement="YES" type="int" >
+		<description>identifiant système</description>
+	</attribute>
+	<attribute id="app_id" name="Application" nullable="NO" type="int" referencedObject="Application" access="default" display="name" >
+		<description>lien vers l'application</description>
+	</attribute>
+	<attribute id="name" name="Nom" nullable="NO" type="varchar(4000)" >
+		<description>Nom compréhensible par l'utilisateur</description>
+	</attribute>
+	<attribute id="code" name="Code" nullable="NO" type="varchar(4000)" >
+		<description>Nom technique</description>
+	</attribute>
+	<attribute id="selector" name="Sélecteur" nullable="YES" type="varchar(4000)" >
+		<description>Selecteur dans la page</description>
+	</attribute>
+</object>

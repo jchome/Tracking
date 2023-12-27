@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<object shortName="track_trace" displayName="Trace" obName="Trace">
+	<description>Stockage de la trace d'un utilisateur dans une application</description>
+	<attribute id="id" name="Identifiant interne" nullable="NO" isKey="YES" autoincrement="YES" type="int" >
+		<description>identifiant interne</description>
+	</attribute>
+	<attribute id="dt_trace" name="Date de trace" nullable="NO" type="timestamp" >
+		<description>Date de la trace</description>
+	</attribute>
+	<attribute id="app_id" name="Application" nullable="NO" type="int" referencedObject="Application" access="default" display="name" >
+		<description>Application tracée</description>
+	</attribute>
+	<attribute id="target_id" name="Cible" nullable="NO" type="int" referencedObject="Cible" access="default" display="name" >
+		<description>Lien vers la cible</description>
+	</attribute>
+	<attribute id="detail" name="Détail" nullable="YES" type="varchar(4000)" >
+		<description>Détail sur le marquage</description>
+	</attribute>
+</object>
