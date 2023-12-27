@@ -23,6 +23,9 @@ class JsCode extends BaseController {
         // Get all targets of the application
         $targets = (new TargetModel())->asObject()->where('app_id', $application->id)->findAll();
         foreach($targets as $target){
+            if($target->selector == ""){
+                continue;
+            }
             echo ' 
 $(\''. $target->selector .'\').on(\'click\', (event) => {
     $(\'body\').append( `<img style="display:none" src="'. base_url() .'/Client/AddTrace/img/'.$application_code
