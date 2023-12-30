@@ -16,7 +16,6 @@ $currentUser = session()->get('currentUser');
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" />
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="<?= base_url() ?>/assets/css/custom.css" />
     <link rel="stylesheet" href="<?= base_url() ?>/assets/css/main-back.css" />
     <!-- Date picker CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" 
@@ -75,6 +74,12 @@ $currentUser = session()->get('currentUser');
                                 Applications
                             </a>
                         </li>
+                        <?php /*
+                        <li class="nav-item">
+                            <a href="<?= base_url() ?>/Cron/Jobs" class="nav-link text-white <?php if($menu == "Cron Jobs"){?>active<?php } ?>">
+                                Jobs
+                            </a>
+                        </li> */ ?>
                         <?php } ?>
                         <li class="nav-item">
                             <a href="<?= base_url() ?>/Generated/Target/Listtargets" class="nav-link text-white <?php if($menu == "Target"){?>active<?php } ?>">

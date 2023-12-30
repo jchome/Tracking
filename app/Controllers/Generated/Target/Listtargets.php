@@ -5,6 +5,8 @@
  */
 namespace App\Controllers\Generated\Target;
 
+use App\Libraries\TargetService;
+
 class ListTargets extends \App\Controllers\HtmlController {
 
 	/**
@@ -31,15 +33,20 @@ class ListTargets extends \App\Controllers\HtmlController {
 		$pager = \Config\Services::pager();
 		// recuperation des donnees
 		$targetModel = new \App\Models\TargetModel();
-
-		$data['targets'] = $targetModel
-			->orderBy($orderBy, $asc)->paginate($limit, 'bootstrap', null, $offset);
-		$data['pager'] = $targetModel->pager;
-
-
 		$applicationModel = new \App\Models\ApplicationModel();
-		$data['applicationCollection'] = index_data($applicationModel->orderBy('name', 'asc')
-			->findAll(), 'id');
+
+		if(session()->get('user_id') == -1){
+			$data['targets'] = $targetModel
+				->orderBy($orderBy, $asc)->paginate($limit, 'bootstrap', null, $offset);
+			$data['pager'] = $targetModel->pager;
+			$data['applicationCollection'] = index_data($applicationModel->orderBy('name', 'asc')
+				->findAll(), 'id');
+		}else{
+			$data['targets'] = (new TargetService())->forUserId(session()->get('user_id'));
+			$data['applicationCollection'] = index_data($applicationModel
+				->where('owner', session()->get('user_id'))->orderBy('name', 'asc')
+				->findAll(), 'id');
+		}
 
 		return $this->view('Generated/Target/listtargets', $data, 'Target');
 	}

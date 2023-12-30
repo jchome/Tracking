@@ -5,6 +5,9 @@
  */
 namespace App\Controllers\Generated\Trace;
 
+use App\Libraries\TargetService;
+use App\Libraries\TraceService;
+
 class ListTraces extends \App\Controllers\HtmlController {
 
 	/**
@@ -31,18 +34,27 @@ class ListTraces extends \App\Controllers\HtmlController {
 		$pager = \Config\Services::pager();
 		// recuperation des donnees
 		$traceModel = new \App\Models\TraceModel();
-
-		$data['traces'] = $traceModel
-			->orderBy($orderBy, $asc)->paginate($limit, 'bootstrap', null, $offset);
-		$data['pager'] = $traceModel->pager;
-
-
 		$applicationModel = new \App\Models\ApplicationModel();
-		$data['applicationCollection'] = index_data($applicationModel->orderBy('name', 'asc')
-			->findAll(), 'id');
 		$targetModel = new \App\Models\TargetModel();
-		$data['targetCollection'] = index_data($targetModel->orderBy('name', 'asc')
-			->findAll(), 'id');
+
+		//log_message('debug', "userid = " . session()->get('user_id'));
+
+		if(session()->get('user_id') == -1){
+			$data['traces'] = $traceModel
+				->orderBy($orderBy, $asc)->paginate($limit, 'bootstrap', null, $offset);
+				
+			$data['applicationCollection'] = index_data($applicationModel->orderBy('name', 'asc')
+				->findAll(), 'id');
+			$data['targetCollection'] = index_data($targetModel->orderBy('name', 'asc')
+				->findAll(), 'id');
+			$data['pager'] = $traceModel->pager;
+		}else{
+			$data['traces'] = (new TraceService())->forUserId(session()->get('user_id'));
+			$data['applicationCollection'] = index_data($applicationModel
+				->where('owner', session()->get('user_id'))->orderBy('name', 'asc')
+				->findAll(), 'id');
+			$data['targetCollection'] = index_data( (new TargetService())->forUserId(session()->get('user_id')), 'id');
+		}
 
 		return $this->view('Generated/Trace/listtraces', $data, 'Trace');
 	}

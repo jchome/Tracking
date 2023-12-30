@@ -87,11 +87,13 @@ endforeach; ?>
 			</tbody>
 		</table>
 	
+		<?php if(isset($pager)) { ?>
 		<div class="row">
 			<ul class="pagination">
 			<?= $pager->links('bootstrap', 'bootstrap_pagination') ?>
 			</ul>
 		</div><!-- .pagination -->
+		<?php } ?>
 		
 		<a href="<?= base_url('Generated/target/createtarget/index')?>"
 			role="button" class="btn btn-primary"><?= lang('generated/Target.form.create.title') ?></a>

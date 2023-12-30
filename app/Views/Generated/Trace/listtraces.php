@@ -58,8 +58,7 @@
 			<tbody>
 <?php
 $enum_detail = array();
-foreach($traces as $trace):
-
+foreach($traces as $trace): 
 ?>
 	<tr>
 
@@ -88,11 +87,13 @@ endforeach; ?>
 			</tbody>
 		</table>
 	
+		<?php if(isset($pager)) { ?>
 		<div class="row">
 			<ul class="pagination">
 			<?= $pager->links('bootstrap', 'bootstrap_pagination') ?>
 			</ul>
 		</div><!-- .pagination -->
+		<?php } ?>
 		
 		<a href="<?= base_url('Generated/trace/createtrace/index')?>"
 			role="button" class="btn btn-primary"><?= lang('generated/Trace.form.create.title') ?></a>

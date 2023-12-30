@@ -32,8 +32,14 @@ class ListApplications extends \App\Controllers\HtmlController {
 		// recuperation des donnees
 		$applicationModel = new \App\Models\ApplicationModel();
 
-		$data['applications'] = $applicationModel
-			->orderBy($orderBy, $asc)->paginate($limit, 'bootstrap', null, $offset);
+		if(session()->get('user_id') == -1){
+			$data['applications'] = $applicationModel
+				->orderBy($orderBy, $asc)->paginate($limit, 'bootstrap', null, $offset);
+		}else{
+			$data['applications'] = $applicationModel
+				->where('owner', session()->get('user_id'))
+				->orderBy($orderBy, $asc)->paginate($limit, 'bootstrap', null, $offset);
+		}
 		$data['pager'] = $applicationModel->pager;
 
 
