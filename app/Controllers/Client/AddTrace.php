@@ -13,7 +13,7 @@ class AddTrace extends \App\Controllers\AjaxController{
 
     /**
      * Called with
-     * localhost:8080/index.php/Client/AddTrace/post/estelle-serenity/massages
+     * localhost:8080/index.php/Client/AddTrace/post/
      * 
      */
     public function post(){
@@ -30,7 +30,24 @@ class AddTrace extends \App\Controllers\AjaxController{
         return $this->statusOK($data);
     }
 
+    /**
+     * Put this image in HTML page to trace the access to a page
+     * 
+     *  <img style="display:none" src="https://estelle-serenity.fr/Tracking/Client/AddTrace/img/FannyGardeDAnimaux/index/?v=<?= time() ?>">
+     * 
+     *  src = "https://estelle-serenity.fr/Tracking/Client/AddTrace/img/"
+     *  + application code 
+     *  + "/"
+     *  + target code
+     *  + "/?v=<?= time() ?>"
+     * 
+     * This will provide a valid empty SVG image
+     */
     public function img($application_code, $target_code){
+        // For local testing, don't store data
+        if( $_SERVER['HTTP_HOST'] == "localhost"){
+            return "";
+        }
         $agent = $this->request->getUserAgent();
         $detail = [
             "lang" => $this->lang(),
@@ -49,10 +66,10 @@ class AddTrace extends \App\Controllers\AjaxController{
                 height="1px"
                 width="1px">
                 <g id="layer1" />
-                <!-- '. print_r($data, true) .' -->
+                <!-- ' . print_r($data, true) . ' -->
                 </svg>';
         } catch (Exception $e) {
-            return $this->statusFailure($e->getMessage());
+            return print_r($e, true);
         }
     }
 
@@ -69,6 +86,9 @@ class AddTrace extends \App\Controllers\AjaxController{
         $ip = $this->request->getIPAddress();
         $location = file_get_contents('http://ip-api.com/json/' . $ip);
         $data_loc = json_decode($location);
+        if($data_loc->status == "fail"){
+            return "";
+        }
         return $data_loc->country;
     }
 
