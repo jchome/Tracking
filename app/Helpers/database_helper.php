@@ -6,7 +6,11 @@
 function index_data($array, $keyName){
     $newArray = [];
     foreach ($array as $data):
-        $newArray[$data[$keyName]] = $data;
+        if(is_array($data)){
+            $newArray[$data[$keyName]] = $data;
+        }else{
+            $newArray[$data->$keyName] = $data;
+        }
     endforeach;
     return $newArray;
 }

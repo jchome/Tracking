@@ -18,4 +18,6 @@ CREATE TABLE `track_trace` (
 ALTER TABLE track_trace ADD CONSTRAINT FK_track_trace_app_id_track_application_id FOREIGN KEY (app_id) REFERENCES track_application (id);
 ALTER TABLE track_trace ADD CONSTRAINT FK_track_trace_target_id_track_target_id FOREIGN KEY (target_id) REFERENCES track_target (id);
 
+ALTER TABLE `track_trace` CHANGE `dt_trace` `dt_trace` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Date de trace'; 
+
 

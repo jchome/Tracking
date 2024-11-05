@@ -91,6 +91,11 @@ $currentUser = session()->get('currentUser');
                                 Traces
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="<?= base_url() ?>/Admin/Info" class="nav-link text-white <?php if($menu == "Graphiques"){?>active<?php } ?>">
+                                Graphiques
+                            </a>
+                        </li>
                         
                     </ul>
                     <hr>
